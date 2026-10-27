@@ -1,0 +1,314 @@
+@import "tailwindcss";
+
+:root {
+  /* User-defined Grayscale Palette */
+  --color-50: #F2F2F2;
+  --color-100: #DADADA;
+  --color-200: #C2C2C2;
+  --color-300: #AAAAAA;
+  --color-400: #919191;
+  --color-500: #797979;
+  --color-600: #616161;
+  --color-700: #494949;
+  --color-800: #303030;
+  --color-900: #181818;
+  --color-950: #000000;
+
+  /* Studio Cobalt Blue OKLab Palette (Balanced, non-glare, professional studio audio) */
+  --blue-50: oklab(0.96 -0.005 -0.014);
+  --blue-100: oklab(0.90 -0.012 -0.033);
+  --blue-200: oklab(0.82 -0.022 -0.061);
+  --blue-300: oklab(0.74 -0.032 -0.089);
+  --blue-400: oklab(0.68 -0.043 -0.117);
+  --blue-500: oklab(0.62 -0.050 -0.136); /* Primary Studio Cobalt */
+  --blue-600: oklab(0.53 -0.046 -0.127);
+  --blue-700: oklab(0.43 -0.039 -0.108);
+  --blue-800: oklab(0.32 -0.029 -0.080);
+  --blue-900: oklab(0.22 -0.019 -0.052);
+  --blue-950: oklab(0.14 -0.012 -0.033);
+
+  /* Studio Crimson / Blood Red Palette (#000000, #3D0000, #950101, #FF0000) */
+  --crimson-950: #000000;
+  --crimson-900: #3D0000;
+  --crimson-700: #950101;
+  --crimson-500: #FF0000;
+
+  /* OKLab representations */
+  --oklab-crimson-950: oklab(0 0 0);
+  --oklab-crimson-900: oklab(0.178 0.075 0.042);
+  --oklab-crimson-700: oklab(0.385 0.144 0.081);
+  --oklab-crimson-500: oklab(0.628 0.225 0.126);
+
+  /* Semantic Danger & Delta Accent Tokens */
+  --accent-danger: var(--crimson-500);
+  --accent-danger-hover: var(--crimson-700);
+  --accent-danger-bg: var(--crimson-900);
+  --accent-danger-glow: rgba(255, 0, 0, 0.4);
+
+  --accent-delta: var(--crimson-500);
+  --accent-delta-dark: var(--crimson-700);
+  --accent-delta-bg: rgba(61, 0, 0, 0.4);
+}
+
+/* Default Dark Mode (Ableton / Pro Tools Warm Studio Charcoal) */
+:root, [data-theme="dark"] {
+  --bg-app: #0F0F10;
+  --bg-panel: #17181A;
+  --bg-card: #131415;
+  --bg-surface: #222326;
+  --bg-input: #101112;
+  --bg-modal: #17181A;
+  --bg-table-header: #202124;
+  --bg-table-row: #17181A;
+  --bg-table-row-hover: #26272B;
+
+  --border-subtle: #1D1E21;
+  --border-default: #2A2B30;
+  --border-contrast: #3C3E45;
+  --border-hover: #50535C;
+
+  --text-pure: #FFFFFF;
+  --text-main: #EDEDEC;
+  --text-body: #D4D4D2;
+  --text-secondary: #A8A8A5;
+  --text-muted: #828280;
+  --text-dim: #5C5C5A;
+
+  --accent-blue: var(--blue-500);
+  --accent-blue-hover: var(--blue-400);
+  --accent-blue-dark: var(--blue-700);
+  --accent-blue-bg: var(--blue-950);
+  --accent-blue-badge-bg: var(--blue-900);
+  --accent-blue-badge-border: var(--blue-700);
+  --accent-blue-badge-text: var(--blue-200);
+
+  --chart-bg: #0C0C0D;
+  --chart-grid: #1A1B1E;
+  --chart-ticks: #2C2D32;
+  --chart-axis: #EDEDEC;
+  --chart-target: #FFFFFF;
+
+  color-scheme: dark;
+}
+
+/* Light Mode (Studio Daylight / Neutral Warm Paper) */
+[data-theme="light"] {
+  --bg-app: #F5F5F4;
+  --bg-panel: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-surface: #EAEAE8;
+  --bg-input: #FFFFFF;
+  --bg-modal: #FFFFFF;
+  --bg-table-header: #F5F5F4;
+  --bg-table-row: #FFFFFF;
+  --bg-table-row-hover: #F0F0EE;
+
+  --border-subtle: #ECECE9;
+  --border-default: #DCDCD8;
+  --border-contrast: #BEBEB8;
+  --border-hover: #9E9E97;
+
+  --text-pure: #151514;
+  --text-main: #151514;
+  --text-body: #2B2B28;
+  --text-secondary: #575752;
+  --text-muted: #7E7E77;
+  --text-dim: #A6A69F;
+
+  --accent-blue: var(--blue-400);
+  --accent-blue-hover: var(--blue-300);
+  --accent-blue-dark: var(--blue-500);
+  --accent-blue-bg: var(--blue-50);
+  --accent-blue-badge-bg: var(--blue-100);
+  --accent-blue-badge-border: var(--blue-200);
+  --accent-blue-badge-text: var(--blue-700);
+
+  --chart-bg: #FFFFFF;
+  --chart-grid: #E8E8E4;
+  --chart-ticks: #D0D0CA;
+  --chart-axis: #151514;
+  --chart-target: #151514;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#root {
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-app);
+}
+
+/* Hide scrollbars on horizontal toolbars/tabs while preserving scroll */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-contrast);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* Range Input / Sliders Styling */
+input[type="range"] {
+  accent-color: var(--accent-blue);
+  touch-action: pan-y;
+}
+
+input[type="range"].touch-none-slider {
+  touch-action: none;
+}
+
+/* Capacitive / Touch Screen Ergonomics */
+@media (pointer: coarse) {
+  input[type="range"] {
+    min-height: 22px;
+    background: transparent;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--border-contrast);
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    border: 2px solid var(--text-pure);
+    margin-top: -6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  input[type="range"]::-moz-range-track {
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--border-contrast);
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    border: 2px solid var(--text-pure);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* uPlot pure dark/light theme override */
+.uplot {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+.u-cursor-x,
+.u-cursor-y {
+  border-color: var(--accent-blue) !important;
+}
+
+.u-cursor-pt {
+  background-color: var(--accent-blue) !important;
+  border-color: var(--text-pure) !important;
+}
+
+/* Native HTML Popover API Styling */
+[popover].Popover,
+.Popover[popover],
+[popover] {
+  position: fixed;
+  inset: unset;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  overflow: visible;
+}
+
+[popover]::backdrop {
+  background: transparent;
+}
+
+.closePopover {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  z-index: 20;
+}
+
+.closePopover:hover {
+  color: var(--text-pure);
+  background-color: var(--border-default);
+}
+
+.btnOpenPopover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-default);
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.btnOpenPopover:hover {
+  border-color: var(--border-contrast);
+  color: var(--text-pure);
+}
