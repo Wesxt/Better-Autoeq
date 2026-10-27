@@ -59,6 +59,7 @@
 ## 🚀 Características Principales
 
 ### 1. Motores de Ecualización Avanzados
+
 Better-Autoeq integra cuatro enfoques de compensación acústica:
 
 - **Parametric EQ (PEQ) Automático**:
@@ -79,6 +80,7 @@ Better-Autoeq integra cuatro enfoques de compensación acústica:
 ---
 
 ### 2. Targets Acústicos y Personalización Fina
+
 Incluye las curvas objetivo más reconocidas en investigación acústica psicoacústica:
 
 - **Harman Over-Ear 2019** (Auriculares circumaurales y supraaurales).
@@ -87,7 +89,8 @@ Incluye las curvas objetivo más reconocidas en investigación acústica psicoac
 - **Campo Difuso (Diffuse Field)** y **Campo Libre (Free Field)**.
 - **Carga de Targets Personalizados**: Importación de archivos `.txt`, `.csv` o formatos de Room EQ Wizard (REW).
 
-#### Parámetros de Ajuste Dinámico del Target:
+#### Parámetros de Ajuste Dinámico del Target
+
 - **Bass Boost**: Ganancia ($\pm 12\text{ dB}$), Frecuencia central $F_c$ ($20 - 200\text{ Hz}$) y Factor de calidad $Q$.
 - **Treble Shelf**: Ganancia ($\pm 12\text{ dB}$), Frecuencia central $F_c$ ($2 - 16\text{ kHz}$) y Factor de calidad $Q$.
 - **Treble Tilt**: Inclinación continua en dB/octava pivotada en $1\text{ kHz}$.
@@ -97,7 +100,9 @@ Incluye las curvas objetivo más reconocidas en investigación acústica psicoac
 ---
 
 ### 3. Base de Datos Integrada AutoEq
+
 Acceso directo a miles de mediciones de auriculares sin salir de la aplicación:
+
 - Conexión e indexación en caliente con el repositorio oficial [jaakkopasanen/AutoEq](https://github.com/jaakkopasanen/AutoEq).
 - Mediciones de rig acústicos profesionales: **Crinacle** (711 y BK5128), **Oratory1990**, **Rtings**, **Innerfidelity**, **Super* Review**, **Reference Audio Analyzer**, etc.
 - Búsqueda en tiempo real con filtrado por fabricante, modelo y fuente de medición.
@@ -106,6 +111,7 @@ Acceso directo a miles de mediciones de auriculares sin salir de la aplicación:
 ---
 
 ### 4. Audición en Tiempo Real (A/B Testing)
+
 - **Motor Web Audio API nativo**: Las curvas generadas se inyectan en tiempo real en una cadena de nodos `BiquadFilterNode` o `ConvolverNode`.
 - **Selector de fuentes de audio**:
   - Carga de pistas de audio locales en formatos **MP3, WAV, FLAC, OGG o AAC**.
@@ -116,6 +122,7 @@ Acceso directo a miles de mediciones de auriculares sin salir de la aplicación:
 ---
 
 ### 5. Analizador Acústico RTA y Captura con Micrófono
+
 - **Real-Time Analyzer (RTA)**: Captura continua de la señal acústica ambiental o de acoplamiento auricular mediante micrófono.
 - **DSP de análisis**:
   - Transformada rápida de Fourier (FFT) configurable de 512 a 16,384 puntos.
@@ -128,6 +135,7 @@ Acceso directo a miles de mediciones de auriculares sin salir de la aplicación:
 ---
 
 ### 6. Soporte Táctil y Gestos Capacitivos
+
 Diseñado y optimizado desde cero tanto para monitores de escritorio como para pantallas táctiles de portátiles, tablets y smartphones:
 
 - 👆 **Seguimiento con 1 dedo**: Desliza el dedo por el gráfico para visualizar la mira (*crosshair*), frecuencia exacta y valor en dB SPL.
@@ -245,38 +253,47 @@ Better-Autoeq/
 ## 💻 Instalación y Puesta en Marcha
 
 ### Prerrequisitos
+
 - [Node.js](https://nodejs.org/) v18.0.0 o superior.
 - Gestor de paquetes `npm`, `pnpm` o `yarn`.
 
 ### 1. Clonar el Repositorio
+
 ```bash
 git clone https://github.com/tu-usuario/Better-Autoeq.git
 cd Better-Autoeq
 ```
 
 ### 2. Instalar Dependencias
+
 ```bash
 npm install
 ```
 
 ### 3. Iniciar el Servidor de Desarrollo
+
 ```bash
 npm run dev
 ```
+
 La aplicación iniciará por defecto en `http://localhost:5173`. Si deseas acceder desde tu teléfono móvil o tablet en la misma red Wi-Fi, Vite expondrá la dirección IP local de tu máquina.
 
 ### 4. Ejecutar las Pruebas Unitarias
+
 ```bash
 npm run test
 ```
 
 ### 5. Compilar para Producción
+
 ```bash
 npm run build
 ```
+
 Los archivos optimizados y minificados se generarán en la carpeta `dist/`.
 
 ### 6. Previsualizar la Compilación de Producción
+
 ```bash
 npm run preview
 ```
@@ -305,16 +322,20 @@ npm run preview
 ## 🔧 Guía de Solución de Problemas (Troubleshooting)
 
 ### Acceso al micrófono en móviles bajo red local (HTTP)
+
 Los navegadores móviles modernos bloquean por seguridad el acceso a la cámara y micrófono (`navigator.mediaDevices.getUserMedia`) si el sitio no proviene de un origen seguro (`HTTPS` o `localhost`).
 
 Si estás probando el servidor de desarrollo en tu teléfono móvil vía Wi-Fi (ejemplo: `http://192.168.1.16:5173`):
+
 1. Abre **Google Chrome** en tu smartphone.
 2. Escribe en la barra de direcciones: `chrome://flags/#unsafely-treat-insecure-origin-as-secure`
 3. Habilita la opción e introduce la URL de tu servidor (ej. `http://192.168.1.16:5173`).
 4. Reinicia Chrome. ¡La captura RTA funcionará con total normalidad!
 
 ### Prevención de distorsión digital (Clipping)
+
 Al aplicar realces positivos de ecualización (por ejemplo $+6\text{ dB}$ en sub-graves), la señal puede superar los $0\text{ dBFS}$ digitales, causando saturación o *clipping*.
+
 - Better-Autoeq calcula automáticamente el **Preamp negativo necesario** ($-\text{Pico Máximo} - 0.2\text{ dB}$ de margen de seguridad).
 - Asegúrate de incluir la línea de `Preamp` generada al pegar la configuración en EqualizerAPO o tu DSP predilecto.
 
@@ -323,6 +344,7 @@ Al aplicar realces positivos de ecualización (por ejemplo $+6\text{ dB}$ en sub
 ## 🤝 Contribuir
 
 ¡Las contribuciones, sugerencias y mejoras son bienvenidas!
+
 1. Haz un Fork del proyecto.
 2. Crea tu rama de funcionalidad (`git checkout -b feature/nueva-mejora`).
 3. Realiza tus cambios y verifica que las pruebas pasen (`npm run test && npm run build`).
