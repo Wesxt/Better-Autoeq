@@ -2,6 +2,7 @@
   "name": "better-autoeq",
   "private": true,
   "version": "0.0.0",
+  "description": "A better solution than jaakkopasanen/AutoEq, featuring several improvements.",
   "type": "module",
   "scripts": {
     "dev": "vite --host 192.168.1.16",
